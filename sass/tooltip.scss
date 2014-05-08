@@ -1,0 +1,52 @@
+/*------------------------------------*\
+    $TOOL TIP
+\*------------------------------------*/
+
+.no-touch{
+  .tooltip{
+    position:relative;
+    cursor:help;
+  }
+  a .tooltip, a.tooltip{
+    cursor:pointer;
+  }
+}
+
+  .tooltip__wrapper{
+    position:absolute;
+    display:inline-block;
+    z-index:11;
+
+    &.is-active{
+      height:100%;
+      overflow:visible;
+    }
+  }
+  .tooltip__tip{
+    @extend %beautons;
+    @extend .round;
+    background:$black;
+    color:$white;
+    line-height:$base-font-size * 2;
+    height:$base-font-size * 2;
+
+    a{
+      color:$gray;
+    }
+  }
+    .tooltip__tip--place-top{
+      margin-top:-$base-spacing-unit;
+      @include arrow(bottom, center, $black, false);
+    }
+    .tooltip__tip--place-bottom{
+      margin-top:$base-spacing-unit;
+      @include arrow(top, center, $black, false);
+    }
+    .tooltip__tip--place-left{
+      margin-right:$base-spacing-unit;
+      @include arrow(right, center, $black, false);
+    }
+    .tooltip__tip--place-right{
+      margin-left:$base-spacing-unit;
+      @include arrow(left, center, $black, false);
+    }
