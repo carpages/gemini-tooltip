@@ -4,7 +4,7 @@
     {"name": "Matt Rose", "email": "matt@mattrose.ca"}
   ],
   "dependencies": {
-    "jquery-boiler": "0.1.x",
-    "jquery-activator": "ssh://git@stash.carpages.ca/gem/jquery-activator.git"
+    "jquery-loader": "ssh://git@stash.carpages.ca/gem/jquery-loader.git",
+    "jquery-boiler": "0.1.x"
   }
 }
