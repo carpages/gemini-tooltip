@@ -1,7 +1,7 @@
 /**
  * @fileoverview
 
-A jQuery plugin to add tooltips to elements on the page
+A Gemini plugin to add tooltips to elements on the page
 
 ### Notes
 - You can alter all the properties using the ``data`` property
@@ -12,15 +12,14 @@ it primarily on ``<span>`` elements
 - You can position the tip ``top``, ``right``, ``bottom``, or ``left``
 
  *
- * @namespace jquery.tooltip
+ * @namespace gemini.tooltip
  * @copyright Carpages.ca 2014
  * @author Matt Rose <matt@mattrose.ca>
  *
- * @requires jquery-loader
- * @requires jquery.boiler
+ * @requires gemini
  *
- * @prop {string} tip {@link jquery.tooltip#tip}
- * @prop {string} place {@link jquery.tooltip#place}
+ * @prop {string} tip {@link gemini.tooltip#tip}
+ * @prop {string} place {@link gemini.tooltip#place}
  *
  * @example
   <html>
@@ -31,16 +30,16 @@ it primarily on ``<span>`` elements
   </html>
  *
  * @example
-  $('.js-tooltip').tooltip();
+  G('.js-tooltip').tooltip();
  */
-define(['jquery-loader', 'jquery.boiler'], function($){
+define(['gemini'], function($){
 
   $.boiler('tooltip', {
     defaults: {
       /**
        * The tip that you want to show the user
        *
-       * @name jquery.tooltip#tip
+       * @name gemini.tooltip#tip
        * @type string
        * @default false
        */
@@ -48,7 +47,7 @@ define(['jquery-loader', 'jquery.boiler'], function($){
       /**
        * The placement of the tooltip. (top, right, bottom, or left)
        *
-       * @name jquery.tooltip#place
+       * @name gemini.tooltip#place
        * @type string
        * @default 'top'
        */
@@ -145,7 +144,7 @@ define(['jquery-loader', 'jquery.boiler'], function($){
      * Force open the tooltip
      *
      * @method
-     * @name jquery.tooltip#open
+     * @name gemini.tooltip#open
     **/
     open: function(){
       this.$tooltip.addClass('is-forced-active');
@@ -155,7 +154,7 @@ define(['jquery-loader', 'jquery.boiler'], function($){
      * Force close the tooltip
      *
      * @method
-     * @name jquery.tooltip#close
+     * @name gemini.tooltip#close
     **/
     close: function(){
       this.$tooltip.removeClass('is-forced-active');
