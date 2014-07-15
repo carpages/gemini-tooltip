@@ -3,6 +3,11 @@
   "authors": [
     {"name": "Matt Rose", "email": "matt@mattrose.ca"}
   ],
+  "main": [
+    "gemini.tooltip.js",
+    "sass/tooltip.scss"
+  ],
+  "ignore": [],
   "dependencies": {
     "gemini-loader": "ssh://git@stash.carpages.ca/gem/gemini-loader.git"
   }
