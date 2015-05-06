@@ -98,6 +98,32 @@ define(['gemini'], function($){
        * PLACE THE TOOLTIP ACCORDINGLY
        * -----------------------------
        */
+      plugin._position();
+
+      /*
+       * ---------------
+       * ADD HOVER EVENT
+       * ---------------
+       */
+      //Add event to activate
+      plugin.$el
+        .on('mouseenter', function(){
+          plugin.$tooltip.addClass('is-active');
+        })
+        .on('mouseleave', function(){
+          plugin.$tooltip.removeClass('is-active');
+        });
+    },
+
+    /**
+     * Calculate and set the positioning for the tooltip
+     *
+     * @method
+     * @name gemini.tooltip#position
+    **/
+    _position: function(){
+      var plugin = this;
+
       // Cache dem dimensions
       var tw = plugin.$tip.outerWidth(),
           th = plugin.$tip.outerHeight(),
@@ -133,20 +159,6 @@ define(['gemini'], function($){
           plugin.$tooltip.css('right', -tw);
           break;
       }
-
-      /*
-       * ---------------
-       * ADD HOVER EVENT
-       * ---------------
-       */
-      //Add event to activate
-      plugin.$el
-        .mouseenter(function(){
-          plugin.$tooltip.addClass('is-active');
-        })
-        .mouseleave(function(){
-          plugin.$tooltip.removeClass('is-active');
-        });
     },
 
     /**
