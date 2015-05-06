@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Gemini Tooltip Edge Test</title>
+
+  <link rel="stylesheet" href="gemini-tooltip.test.css" media="screen">
+  <style>
+    body {
+      padding: 1em;
+    }
+    .box {
+      display: inline-block;
+      padding: 0.75em;
+      background: rgba(0, 0, 0, 0.2);
+      margin-bottom: 1em;
+    }
+    .box--medium {
+      padding: 1.5em;
+    }
+    .box--large {
+      padding: 2.5em;
+    }
+  </style>
+
+  <script>window.G={D:{_qj:[]}};G.Q=function(k){G.D._qj.push(k)};//0.1.0</script>
+</head>
+<body>
+  <div class="js-tooltip box">Lorem the thing</div>
+  <div class="js-tooltip box box--medium">Lorem the thing</div>
+  <div class="js-tooltip box box--large">Lorem the thing</div>
+
+  <br>
+
+  <div class="js-tooltip box" data-place="right">Test Right</div>
+  <div class="js-tooltip box" data-place="bottom">Test Bottom</div>
+  <div class="js-tooltip box" data-place="left">Test Left</div>
+
+  <br>
+
+  <div class="js-tooltip box" data-tip="Test a really long tip for the user to read">Test Left</div>
+
+  <!-- Load JS. -->
+  <script data-main="gemini-tooltip.edge" src="../bower_components/requirejs/require.js"></script>
+</body>
+</html>
