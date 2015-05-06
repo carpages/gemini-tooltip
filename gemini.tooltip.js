@@ -5,7 +5,7 @@ A Gemini plugin to add tooltips to elements on the page
 
 ### Notes
 - You can alter all the properties using the ``data`` property
-- The tip will be in relation to the elemnt, so it's suggested that you use
+- The tip will be in relation to the element, so it's suggested that you use
 it primarily on ``<span>`` elements
 
 ### Features
