@@ -1,59 +1,123 @@
-/*------------------------------------*\
-    $TOOL TIP
-\*------------------------------------*/
+/**
+ ********************************
+ * _TOOLTIP.SCSS
+ ********************************
+ */
 
-.no-touch{
-  .w-tooltip{
-    position:relative;
-    cursor:help;
+/**
+ * @settings $gemini-tooltip
+ * @description The settings to give tooltips a custom look
+ *
+ * @prop {color} [color=#333] The font color
+ * @prop {color} [background-color=#EEE] The background color
+ * @prop {measurement} [padding-ends=0.5em] The padding on the top and bottom
+ * @prop {measurement} [padding-sides=1em] The padding on the left and right
+ * @prop {measurement} [border-width=0] The width of the border
+ * @prop {color} [borde-color=#333] The color of the border
+ * @prop {measurement} [border-radius=0] The border of the radius
+ * @prop {measurement} [arrow-size=get(spacing)*0.4] The size of the arrow
+ */
+$gemini-tooltip: () !default;
+
+$gemini-tooltip: extend((
+  color: #333,
+  background-color: #EEE,
+  padding-ends: 0.25em,
+  padding-sides: 0.5em,
+  border-width: 1px,
+  border-color: #333,
+  border-radius: 0,
+  arrow-size: get(spacing) * 0.4,
+), $gemini-tooltip);
+
+.no-touch {
+  .w-tooltip {
+    position: relative;
+    cursor: help;
   }
-  a .w-tooltip, a.w-tooltip{
-    cursor:pointer;
+  a .w-tooltip,
+  a.w-tooltip {
+    cursor: pointer;
   }
 }
 
-  .tooltip{
-    height:0;overflow:hidden;
-    position:absolute;
-    display:inline-block;
-    z-index:11;
+  .tooltip {
+    height: 0;
+    overflow: hidden;
+    position: absolute;
+    display: inline-block;
+    z-index: 11;
 
     // Add slight transition
-    @extend %gpu;
-    opacity:0;
+    opacity: 0;
+    @include gpu;
     @include transition(opacity .25s ease);
 
-    &.is-active, &.is-forced-active{
-      height:auto;overflow:visible;
-      opacity:1;
+    &.is-active,
+    &.is-forced-active {
+      height: auto;
+      overflow: visible;
+      opacity: 1;
     }
   }
-  .tooltip__tip{
-    position:relative;
-    @extend %beautons;
-    @extend .round;
-    background:$black;
-    color:$white;
-    line-height:$base-font-size * 2;
-    height:$base-font-size * 2;
+  .tooltip__tip {
+    @include tag(
+      $color         : get(color, $gemini-tooltip),
+      $background    : get(background-color, $gemini-tooltip),
+      $ends          : get(padding-ends, $gemini-tooltip),
+      $sides         : get(padding-sides, $gemini-tooltip),
+      $border-width  : get(border-width, $gemini-tooltip),
+      $border-color  : get(border-color, $gemini-tooltip),
+      $border-radius : get(border-radius, $gemini-tooltip)
+    );
+    white-space: nowrap;
+    position: relative;
 
-    a{
-      color:$grey;
+    a {
+      color: getColor(g20);
     }
   }
-    .tooltip__tip--arrow-top{
-      top:$arrow-size;
-      @include arrow(top, center, $black, false);
+    .tooltip__tip--arrow-top {
+      top: get(arrow-size, $gemini-tooltip);
+      @include arrow(
+        top,
+        center,
+        get(arrow-size, $gemini-tooltip),
+        get(background-color, $gemini-tooltip),
+        get(border-width, $gemini-tooltip),
+        get(border-color, $gemini-tooltip)
+      );
     }
-    .tooltip__tip--arrow-bottom{
-      top:-$arrow-size;
-      @include arrow(bottom, center, $black, false);
+    .tooltip__tip--arrow-bottom {
+      top: - get(arrow-size, $gemini-tooltip);
+      @include arrow(
+        bottom,
+        center,
+        get(arrow-size, $gemini-tooltip),
+        get(background-color, $gemini-tooltip),
+        get(border-width, $gemini-tooltip),
+        get(border-color, $gemini-tooltip)
+      );
     }
-    .tooltip__tip--arrow-left{
-      left:$arrow-size;
-      @include arrow(left, center, $black, false);
+    .tooltip__tip--arrow-left {
+      left: get(arrow-size, $gemini-tooltip);
+      @include arrow(
+        left,
+        center,
+        get(arrow-size, $gemini-tooltip),
+        get(background-color, $gemini-tooltip),
+        get(border-width, $gemini-tooltip),
+        get(border-color, $gemini-tooltip)
+      );
     }
-    .tooltip__tip--arrow-right{
-      right:$arrow-size;
-      @include arrow(right, center, $black, false);
+    .tooltip__tip--arrow-right {
+      right: get(arrow-size, $gemini-tooltip);
+      @include arrow(
+        right,
+        center,
+        get(arrow-size, $gemini-tooltip),
+        get(background-color, $gemini-tooltip),
+        get(border-width, $gemini-tooltip),
+        get(border-color, $gemini-tooltip)
+      );
     }
