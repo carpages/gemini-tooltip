@@ -17,7 +17,6 @@
   },
   "devDependencies": {
     "requirejs": "~2.1.11",
-    "qunit": "~1.18.0",
-    "within-viewport": "~0.1.0"
+    "qunit": "~1.18.0"
   }
 }
