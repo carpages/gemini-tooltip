@@ -60,5 +60,6 @@ module.exports = function (grunt) {
   });
 
   // Default task.
-  grunt.registerTask('default', ['jshint', 'connect', 'qunit']);
+  grunt.registerTask('default', ['compass', 'jshint', 'connect', 'qunit']);
+  grunt.registerTask('ci', ['default']);
 };
