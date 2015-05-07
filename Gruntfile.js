@@ -63,6 +63,7 @@ module.exports = function (grunt) {
           urls: ['http://localhost:9000/test/<%= pkg.name %>.html'],
           build: process.env.TRAVIS_JOB_ID,
           browsers: [
+            /*
             // iOS
             {
               browserName: 'iphone',
@@ -80,6 +81,7 @@ module.exports = function (grunt) {
               platform: 'Linux',
               version: '4.3'
             },
+            */
             // OS X
             {
               browserName: 'safari',
