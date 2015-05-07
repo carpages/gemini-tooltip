@@ -42,9 +42,9 @@ require(['gemini', 'gemini.tooltip'], function(G) {
   /**
    * Helpers
    */
-  function withinviewport(elem) {
-    var docViewTop = $(window).scrollTop();
-    var docViewBottom = docViewTop + $(window).height();
+  function withinBody(elem) {
+    var docViewTop = $('body').scrollTop();
+    var docViewBottom = docViewTop + $('body').height();
 
     var elemTop = $(elem).offset().top;
     var elemBottom = elemTop + $(elem).height();
@@ -170,10 +170,10 @@ require(['gemini', 'gemini.tooltip'], function(G) {
     });
     var tip = this.$el.data('tooltip').$tooltip[0];
 
-    assert.ok(!withinviewport(tip));
+    assert.ok(!withinBody(tip));
     this.$el.trigger('mouseenter');
     setTimeout(function() {
-      assert.ok(withinviewport(tip));
+      assert.ok(withinBody(tip));
       done();
     }, 500);
   });
@@ -342,15 +342,15 @@ require(['gemini', 'gemini.tooltip'], function(G) {
     });
     var tip = $el.data('tooltip').$tooltip[0];
 
-    assert.ok(!withinviewport(tip));
+    assert.ok(!withinBody(tip));
     $el.tooltip('open');
     setTimeout(function() {
-      assert.ok(withinviewport(tip), 'Tip was opened');
+      assert.ok(withinBody(tip), 'Tip was opened');
       $el.tooltip('close');
       done1();
     }, 500);
     setTimeout(function() {
-      assert.ok(!withinviewport(tip), 'Tip was closed');
+      assert.ok(!withinBody(tip), 'Tip was closed');
       done2();
     }, 1000);
   });
