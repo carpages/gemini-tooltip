@@ -56,10 +56,100 @@ module.exports = function (grunt) {
           outputStyle: 'expanded'
         }
       }
+    },
+    'saucelabs-qunit': {
+      all: {
+        options: {
+          urls: ['http://localhost:9000/test/<%= pkg.name %>.html'],
+          build: process.env.TRAVIS_JOB_ID,
+          browsers: [
+            // iOS
+            {
+              browserName: 'iphone',
+              platform: 'OS X 10.9',
+              version: '7.1'
+            },
+            {
+              browserName: 'ipad',
+              platform: 'OS X 10.9',
+              version: '7.1'
+            },
+            // Android
+            {
+              browserName: 'android',
+              platform: 'Linux',
+              version: '4.3'
+            },
+            // OS X
+            {
+              browserName: 'safari',
+              platform: 'OS X 10.9',
+              version: '7'
+            },
+            {
+              browserName: 'safari',
+              platform: 'OS X 10.8',
+              version: '6'
+            },
+            {
+              browserName: 'firefox',
+              platform: 'OS X 10.9',
+              version: '28'
+            },
+            // Windows
+            {
+              browserName: 'internet explorer',
+              platform: 'Windows 8.1',
+              version: '11'
+            },
+            {
+              browserName: 'internet explorer',
+              platform: 'Windows 8',
+              version: '10'
+            },
+            {
+              browserName: 'internet explorer',
+              platform: 'Windows 7',
+              version: '11'
+            },
+            {
+              browserName: 'internet explorer',
+              platform: 'Windows 7',
+              version: '10'
+            },
+            {
+              browserName: 'internet explorer',
+              platform: 'Windows 7',
+              version: '9'
+            },
+            {
+              browserName: 'internet explorer',
+              platform: 'Windows 7',
+              version: '8'
+            },
+            {
+              browserName: 'firefox',
+              platform: 'Windows 7',
+              version: '29'
+            },
+            {
+              browserName: 'chrome',
+              platform: 'Windows 7',
+              version: '34'
+            },
+            // Linux
+            {
+              browserName: 'firefox',
+              platform: 'Linux',
+              version: '29'
+            }
+          ]
+        }
+      }
     }
   });
 
   // Default task.
   grunt.registerTask('default', ['compass', 'jshint', 'connect', 'qunit']);
-  grunt.registerTask('ci', ['default']);
+  grunt.registerTask('ci', ['default', 'saucelabs-qunit']);
 };

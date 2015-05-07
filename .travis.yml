@@ -8,3 +8,7 @@ before_script:
   - npm install -g bower
   - bower install
 script: grunt ci --verbose
+env:
+  global:
+    - secure: a/Xka2GfDf6Ym2uT3z2o84sir+/Yfqn248upZtzFvFaYzT8+2WCSR56ZE5G5X5EmJ0yyKrd9gjJhC9bfEttm3QL4OK1zYmHsrem08byuI2Ohib7yijQUOXRE7o4RFyTeiTLFuXSgs5WRjx2n+K169FuHalBHuU7xzMLd25V/mxI=
+    - secure: e1RakHump5DOdcxtE5ACMe5JtPWuQ9CDh+FcV/bFYtXhdlffUwfGR1Gb5Jyi1ZwvxPI6YawaeUysTVuUmS7XMhoRyYkmfybaLz5lGSzU7Gne2jgMzxVPeDx0CT+NoXerstY0/cui8+HI4b/p5LFBdFl49h2MSZBDwAZGT1XNlR0=
