@@ -53,6 +53,9 @@ require(['gemini', 'gemini.tooltip'], function(G) {
     $('html').addClass('no-touch');
   }
 
+  // Rounding shortcut
+  var R = Math.round;
+
   /*
     ======== A Handy Little QUnit Reference ========
     http://api.qunitjs.com/
@@ -241,7 +244,7 @@ require(['gemini', 'gemini.tooltip'], function(G) {
     $el.trigger('mouseenter');
 
     setTimeout(function() {
-      assert.ok($tip.offset().left + $tip.width() <= $el.offset().left,
+      assert.ok(R($tip.offset().left + $tip.width()) <= R($el.offset().left),
         'Tip is on the left');
       assert.ok(
         Math.abs(($tip.offset().top + $tip.height() / 2) -
@@ -264,7 +267,7 @@ require(['gemini', 'gemini.tooltip'], function(G) {
     $el.trigger('mouseenter');
 
     setTimeout(function() {
-      assert.ok($tip.offset().left >= $el.offset().left + $el.width(),
+      assert.ok(R($tip.offset().left) >= R($el.offset().left + $el.width()),
         'Tip is on the right');
       assert.ok(
         Math.abs(($tip.offset().top + $tip.height() / 2) -
@@ -287,7 +290,7 @@ require(['gemini', 'gemini.tooltip'], function(G) {
     $el.trigger('mouseenter');
 
     setTimeout(function() {
-      assert.ok($tip.offset().top <= $el.offset().top - $el.height(),
+      assert.ok(R($tip.offset().top) <= R($el.offset().top - $el.height()),
         'Tip is on top');
       assert.ok(
         Math.abs(($tip.offset().left + $tip.width() / 2) -
@@ -310,7 +313,7 @@ require(['gemini', 'gemini.tooltip'], function(G) {
     $el.trigger('mouseenter');
 
     setTimeout(function() {
-      assert.ok($tip.offset().top >= $el.offset().top + $el.height(),
+      assert.ok(R($tip.offset().top) >= R($el.offset().top + $el.height()),
         'Tip is on bottom');
       assert.ok(
         Math.abs(($tip.offset().left + $tip.width() / 2) -
@@ -333,7 +336,7 @@ require(['gemini', 'gemini.tooltip'], function(G) {
     var $tip = this.$el.data('tooltip').$tooltip;
 
     this.$el.trigger('hover');
-    assert.ok($tip.offset().left + $tip.width() <= this.$el.offset().left);
+    assert.ok(R($tip.offset().left + $tip.width()) <= R(this.$el.offset().left));
   });
 
   QUnit.test('Tip appears on right with attribute set', function(assert) {
@@ -346,7 +349,7 @@ require(['gemini', 'gemini.tooltip'], function(G) {
     var $tip = this.$el.data('tooltip').$tooltip;
 
     this.$el.trigger('hover');
-    assert.ok($tip.offset().left >= this.$el.offset().left + this.$el.width());
+    assert.ok(R($tip.offset().left) >= R(this.$el.offset().left + this.$el.width()));
   });
 
   QUnit.test('Tip appears on top with attribute set', function(assert) {
@@ -359,7 +362,7 @@ require(['gemini', 'gemini.tooltip'], function(G) {
     var $tip = this.$el.data('tooltip').$tooltip;
 
     this.$el.trigger('hover');
-    assert.ok($tip.offset().top <= this.$el.offset().top - this.$el.height());
+    assert.ok(R($tip.offset().top) <= R(this.$el.offset().top - this.$el.height()));
   });
 
   QUnit.test('Tip appears on bottom with attribute set', function(assert) {
@@ -372,7 +375,7 @@ require(['gemini', 'gemini.tooltip'], function(G) {
     var $tip = this.$el.data('tooltip').$tooltip;
 
     this.$el.trigger('hover');
-    assert.ok($tip.offset().top >= this.$el.offset().top + this.$el.height());
+    assert.ok(R($tip.offset().top) >= R(this.$el.offset().top + this.$el.height()));
   });
 
   /*******************/
