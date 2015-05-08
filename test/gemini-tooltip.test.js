@@ -77,15 +77,27 @@ require(['gemini', 'gemini.tooltip'], function(G) {
   /**
    * Helpers
    */
-  function withinBody(elem) {
-    var docViewTop = $('body').scrollTop();
-    var docViewBottom = docViewTop + $('body').height();
+  function visibleInBody(el) {
+    var body = {};
+    var elem = {};
+    var $body = $('body');
+    var $el = $(el);
 
-    var elemTop = $(elem).offset().top;
-    var elemBottom = elemTop + $(elem).height();
+    body.top    = $body.scrollTop();
+    body.bottom = body.top + $body.height();
+    body.left   = $body.scrollLeft();
+    body.right  = body.left + $body.width();
 
-    return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop)) &&
-           (parseFloat($(elem).css('opacity')) > 0);
+    elem.top    = $el.offset().top;
+    elem.bottom = elem.top + $el.height();
+    elem.left   = $el.offset().left;
+    elem.right  = elem.left + $el.width();
+
+    return ((elem.bottom <= body.bottom) && (elem.top >= body.top)) &&
+           ((elem.right <= body.right) && (elem.left >= body.left)) &&
+           $el.width() > 0 &&
+           $el.height() > 0 &&
+           (parseFloat($el.css('opacity')) > 0);
   }
 
   /**
@@ -205,10 +217,10 @@ require(['gemini', 'gemini.tooltip'], function(G) {
     });
     var tip = this.$el.data('tooltip').$tooltip[0];
 
-    assert.ok(!withinBody(tip));
+    assert.ok(!visibleInBody(tip));
     this.$el.trigger('mouseenter');
     setTimeout(function() {
-      assert.ok(withinBody(tip));
+      assert.ok(visibleInBody(tip));
       done();
     }, 500);
   });
@@ -377,15 +389,15 @@ require(['gemini', 'gemini.tooltip'], function(G) {
     });
     var tip = $el.data('tooltip').$tooltip[0];
 
-    assert.ok(!withinBody(tip));
+    assert.ok(!visibleInBody(tip));
     $el.tooltip('open');
     setTimeout(function() {
-      assert.ok(withinBody(tip), 'Tip was opened');
+      assert.ok(visibleInBody(tip), 'Tip was opened');
       $el.tooltip('close');
       done1();
     }, 500);
     setTimeout(function() {
-      assert.ok(!withinBody(tip), 'Tip was closed');
+      assert.ok(!visibleInBody(tip), 'Tip was closed');
       done2();
     }, 1000);
   });
