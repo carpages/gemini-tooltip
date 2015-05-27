@@ -32,7 +32,18 @@ it primarily on ``<span>`` elements
  * @example
   G('.js-tooltip').tooltip();
  */
-define(['gemini'], function($){
+ (function(factory) {
+   if (typeof define === 'function' && define.amd) {
+     // AMD. Register as an anonymous module.
+     define(['gemini'], factory);
+   } else if (typeof exports === 'object') {
+     // Node/CommonJS
+     module.exports = factory(require('gemini'));
+   } else {
+     // Browser globals
+     factory(G);
+   }
+ }(function($) {
 
   $.boiler('tooltip', {
     defaults: {
@@ -187,4 +198,4 @@ define(['gemini'], function($){
   // This way you don't need to require both jquery and the plugin
   return $;
 
-});
+}));
