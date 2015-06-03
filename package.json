@@ -8,11 +8,10 @@
     "url": "http://mattrose.ca"
   },
   "main": "gemini.tooltip.js",
-  "licenses": [
-    {
-      "type": "MIT"
-    }
-  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carpages/gemini-tooltip"
+  },
   "dependencies": {
     "gemini-loader": "~0",
     "gemini-css": "~1"
@@ -27,5 +26,6 @@
     "load-grunt-tasks": "~0.2.0",
     "time-grunt": "~0.2.3",
     "grunt-contrib-compass": "~1.0.1"
-  }
+  },
+  "licenses": "MIT"
 }
