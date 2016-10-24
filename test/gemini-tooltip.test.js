@@ -1,3 +1,4 @@
+/* eslint-env qunit */
 /*
  * Added for Saucelabs
  * https://github.com/axemclion/grunt-saucelabs#test-result-details-with-qunit
@@ -5,27 +6,27 @@
 var log = [];
 var testName;
 
-QUnit.done(function (test_results) {
+QUnit.done( function( testResults ) {
   var tests = [];
-  for(var i = 0, len = log.length; i < len; i++) {
+  for ( var i = 0, len = log.length; i < len; i++ ) {
     var details = log[i];
     tests.push({
-      name: details.name,
-      result: details.result,
+      name:     details.name,
+      result:   details.result,
       expected: details.expected,
-      actual: details.actual,
-      source: details.source
+      actual:   details.actual,
+      source:   details.source
     });
   }
-  test_results.tests = tests;
+  testResults.tests = tests;
 
-  window.global_test_results = test_results;
+  window.global_test_results = testResults;
 });
-QUnit.testStart(function(testDetails){
-  QUnit.log(function(details){
-    if (!details.result) {
+QUnit.testStart( function( testDetails ) {
+  QUnit.log( function( details ) {
+    if ( !details.result ) {
       details.name = testDetails.name;
-      log.push(details);
+      log.push( details );
     }
   });
 });
@@ -35,22 +36,22 @@ QUnit.testStart(function(testDetails){
  */
 requirejs.config({
   baseUrl: '../',
-  paths: {
-    'underscore':        'bower_components/underscore/underscore',
-    'jquery':            'bower_components/jquery/dist/jquery',
-    'jquery.boiler':     'bower_components/jquery-boiler/jquery.boiler',
-    'gemini':            'bower_components/gemini-loader/gemini',
-    'gemini.support':    'bower_components/gemini-support/gemini.support'
+  paths:   {
+    'underscore':     'bower_components/underscore/underscore',
+    'jquery':         'bower_components/jquery/dist/jquery',
+    'jquery.boiler':  'bower_components/jquery-boiler/jquery.boiler',
+    'gemini':         'bower_components/gemini-loader/gemini',
+    'gemini.support': 'bower_components/gemini-support/gemini.support'
   }
 });
 
-require(['gemini', 'gemini.tooltip'], function(G) {
+require([ 'gemini', 'gemini.tooltip' ], function( G ) {
   QUnit.start();
   // Phantom JS touch hack
   // https://github.com/Modernizr/Modernizr/issues/1344
-  if (window._phantom) {
-    $('html').removeClass('yes-touch');
-    $('html').addClass('no-touch');
+  if ( window._phantom ) {
+    $( 'html' ).removeClass( 'yes-touch' );
+    $( 'html' ).addClass( 'no-touch' );
   }
 
   // Rounding shortcut
@@ -80,119 +81,119 @@ require(['gemini', 'gemini.tooltip'], function(G) {
   /**
    * Helpers
    */
-  function visibleInBody(el) {
+  function visibleInBody( el ) {
     var body = {};
     var elem = {};
-    var $body = $('body');
-    var $el = $(el);
+    var $body = $( 'body' );
+    var $el = $( el );
 
-    body.top    = $body.scrollTop();
+    body.top = $body.scrollTop();
     body.bottom = body.top + $body.height();
-    body.left   = $body.scrollLeft();
-    body.right  = body.left + $body.width();
+    body.left = $body.scrollLeft();
+    body.right = body.left + $body.width();
 
-    elem.top    = $el.offset().top;
+    elem.top = $el.offset().top;
     elem.bottom = elem.top + $el.height();
-    elem.left   = $el.offset().left;
-    elem.right  = elem.left + $el.width();
+    elem.left = $el.offset().left;
+    elem.right = elem.left + $el.width();
 
-    return ((elem.bottom <= body.bottom) && (elem.top >= body.top)) &&
-           ((elem.right <= body.right) && (elem.left >= body.left)) &&
+    return (( elem.bottom <= body.bottom ) && ( elem.top >= body.top )) &&
+           (( elem.right <= body.right ) && ( elem.left >= body.left )) &&
            $el.width() > 0 &&
            $el.height() > 0 &&
-           (parseFloat($el.css('opacity')) > 0);
+           ( parseFloat( $el.css( 'opacity' )) > 0 );
   }
 
   /**
    * CORE
    */
-  QUnit.module('Core Plugin Tests', {
+  QUnit.module( 'Core Plugin Tests', {
     beforeEach: function() {
-      this.$el = $('<a href="#"></a>');
+      this.$el = $( '<a href="#"></a>' );
     }
   });
 
-  QUnit.test('tooltip() is defined', function(assert) {
-    assert.expect(1);
+  QUnit.test( 'tooltip() is defined', function( assert ) {
+    assert.expect( 1 );
 
-    assert.strictEqual(typeof this.$el.tooltip, 'function');
+    assert.strictEqual( typeof this.$el.tooltip, 'function' );
   });
 
-  QUnit.test('Is chainable', function(assert) {
-    assert.expect(1);
+  QUnit.test( 'Is chainable', function( assert ) {
+    assert.expect( 1 );
 
-    assert.strictEqual(this.$el.tooltip(), this.$el);
+    assert.strictEqual( this.$el.tooltip(), this.$el );
   });
 
-  QUnit.test('Public access to plugin object', function(assert) {
-    assert.expect(1);
+  QUnit.test( 'Public access to plugin object', function( assert ) {
+    assert.expect( 1 );
 
     this.$el.tooltip();
-    assert.strictEqual(this.$el.data('tooltip').el, this.$el[0]);
+    assert.strictEqual( this.$el.data( 'tooltip' ).el, this.$el[0]);
   });
 
   /**
    * Functionality
    */
-  QUnit.module('Basic Functionality', {
+  QUnit.module( 'Basic Functionality', {
     beforeEach: function() {
-      this.$el = $('<a href="#"></a>');
+      this.$el = $( '<a href="#"></a>' );
     }
   });
 
-  QUnit.test('Adds markup for tip', function (assert) {
-    assert.expect(2);
+  QUnit.test( 'Adds markup for tip', function( assert ) {
+    assert.expect( 2 );
 
-    assert.ok(!this.$el.html());
+    assert.ok( !this.$el.html());
     this.$el.tooltip({
       tip: 'test'
     });
-    assert.ok(!!this.$el.html());
+    assert.ok( !!this.$el.html());
   });
 
-  QUnit.test('You can control the tip content', function(assert) {
-    assert.expect(1);
+  QUnit.test( 'You can control the tip content', function( assert ) {
+    assert.expect( 1 );
 
     this.$el.tooltip({
       tip: 'test'
     });
-    var $tip = this.$el.data('tooltip').$tip;
+    var $tip = this.$el.data( 'tooltip' ).$tip;
 
-    assert.strictEqual($tip.html(), 'test');
+    assert.strictEqual( $tip.html(), 'test' );
   });
 
-  QUnit.test('You can control the tip content through a data attribute', function(assert) {
-    assert.expect(1);
+  QUnit.test( 'You can control the tip content through a data attribute', function( assert ) {
+    assert.expect( 1 );
 
-    this.$el.data('tip', 'test');
+    this.$el.data( 'tip', 'test' );
     this.$el.tooltip();
-    var $tip = this.$el.data('tooltip').$tip;
+    var $tip = this.$el.data( 'tooltip' ).$tip;
 
-    assert.strictEqual($tip.html(), 'test');
+    assert.strictEqual( $tip.html(), 'test' );
   });
 
-  QUnit.test('Add a tooltip extension class', function(assert) {
-    assert.expect(1);
+  QUnit.test( 'Add a tooltip extension class', function( assert ) {
+    assert.expect( 1 );
 
     this.$el.tooltip({
-      tip: 'test',
+      tip:       'test',
       extension: 'tooltip--ext'
     });
-    var $tooltip = this.$el.data('tooltip').$tooltip;
+    var $tooltip = this.$el.data( 'tooltip' ).$tooltip;
 
-    assert.ok($tooltip.hasClass('tooltip--ext'));
+    assert.ok( $tooltip.hasClass( 'tooltip--ext' ));
   });
 
-  QUnit.test('Add a tooltip extension class though a data attribute', function(assert) {
-    assert.expect(1);
+  QUnit.test( 'Add a tooltip extension class though a data attribute', function( assert ) {
+    assert.expect( 1 );
 
-    this.$el.data('extension', 'tooltip--ext');
+    this.$el.data( 'extension', 'tooltip--ext' );
     this.$el.tooltip({
       tip: 'test'
     });
-    var $tooltip = this.$el.data('tooltip').$tooltip;
+    var $tooltip = this.$el.data( 'tooltip' ).$tooltip;
 
-    assert.ok($tooltip.hasClass('tooltip--ext'));
+    assert.ok( $tooltip.hasClass( 'tooltip--ext' ));
   });
 
   /**
@@ -200,8 +201,8 @@ require(['gemini', 'gemini.tooltip'], function(G) {
    */
   var lifecycle = {
     beforeEach: function() {
-      this.$el = $('<div>Test it out</div>');
-      $('#js-fixture').append(this.$el);
+      this.$el = $( '<div>Test it out</div>' );
+      $( '#js-fixture' ).append( this.$el );
     },
     afterEach: function() {
       this.$el.remove();
@@ -209,180 +210,180 @@ require(['gemini', 'gemini.tooltip'], function(G) {
   };
 
   /*******************/
-  QUnit.module('Events', lifecycle);
+  QUnit.module( 'Events', lifecycle );
 
-  QUnit.test('Tip appears on hover', function(assert) {
-    assert.expect(2);
+  QUnit.test( 'Tip appears on hover', function( assert ) {
+    assert.expect( 2 );
     var done = assert.async();
 
     this.$el.tooltip({
       tip: 'test'
     });
-    var tip = this.$el.data('tooltip').$tooltip[0];
+    var tip = this.$el.data( 'tooltip' ).$tooltip[0];
 
-    assert.ok(!visibleInBody(tip));
-    this.$el.trigger('mouseenter');
-    setTimeout(function() {
-      assert.ok(visibleInBody(tip));
+    assert.ok( !visibleInBody( tip ));
+    this.$el.trigger( 'mouseenter' );
+    setTimeout( function() {
+      assert.ok( visibleInBody( tip ));
       done();
-    }, 500);
+    }, 500 );
   });
 
   /*******************/
-  QUnit.module('Tip Placement', lifecycle);
+  QUnit.module( 'Tip Placement', lifecycle );
 
-  QUnit.test('Tip appears on left', function(assert) {
-    assert.expect(2);
+  QUnit.test( 'Tip appears on left', function( assert ) {
+    assert.expect( 2 );
     var done = assert.async();
 
     var $el = this.$el;
     $el.tooltip({
-      tip: "test",
-      place: "left"
+      tip:   'test',
+      place: 'left'
     });
-    var $tip = $el.data('tooltip').$tooltip;
-    $el.trigger('mouseenter');
+    var $tip = $el.data( 'tooltip' ).$tooltip;
+    $el.trigger( 'mouseenter' );
 
-    setTimeout(function() {
-      assert.ok(R($tip.offset().left + $tip.width()) <= R($el.offset().left),
-        'Tip is on the left');
+    setTimeout( function() {
+      assert.ok( R( $tip.offset().left + $tip.width()) <= R( $el.offset().left ),
+        'Tip is on the left' );
       assert.ok(
-        Math.abs(($tip.offset().top + $tip.height() / 2) -
-                 ($el.offset().top + $el.height() / 2)) < 2,
-        'Tip is centered vertically');
+        Math.abs(( $tip.offset().top + $tip.height() / 2 ) -
+                 ( $el.offset().top + $el.height() / 2 )) < 2,
+        'Tip is centered vertically' );
       done();
-    }, 500);
+    }, 500 );
   });
 
-  QUnit.test('Tip appears on right', function(assert) {
-    assert.expect(2);
+  QUnit.test( 'Tip appears on right', function( assert ) {
+    assert.expect( 2 );
     var done = assert.async();
 
     var $el = this.$el;
     $el.tooltip({
-      tip: "test",
-      place: "right"
+      tip:   'test',
+      place: 'right'
     });
-    var $tip = $el.data('tooltip').$tooltip;
-    $el.trigger('mouseenter');
+    var $tip = $el.data( 'tooltip' ).$tooltip;
+    $el.trigger( 'mouseenter' );
 
-    setTimeout(function() {
-      assert.ok(R($tip.offset().left) >= R($el.offset().left + $el.width()),
-        'Tip is on the right');
+    setTimeout( function() {
+      assert.ok( R( $tip.offset().left ) >= R( $el.offset().left + $el.width()),
+        'Tip is on the right' );
       assert.ok(
-        Math.abs(($tip.offset().top + $tip.height() / 2) -
-                 ($el.offset().top + $el.height() / 2)) < 2,
-        'Tip is centered vertically');
+        Math.abs(( $tip.offset().top + $tip.height() / 2 ) -
+                 ( $el.offset().top + $el.height() / 2 )) < 2,
+        'Tip is centered vertically' );
       done();
-    }, 500);
+    }, 500 );
   });
 
-  QUnit.test('Tip appears on top', function(assert) {
-    assert.expect(2);
+  QUnit.test( 'Tip appears on top', function( assert ) {
+    assert.expect( 2 );
     var done = assert.async();
 
     var $el = this.$el;
     $el.tooltip({
-      tip: "test",
-      place: "top"
+      tip:   'test',
+      place: 'top'
     });
-    var $tip = $el.data('tooltip').$tooltip;
-    $el.trigger('mouseenter');
+    var $tip = $el.data( 'tooltip' ).$tooltip;
+    $el.trigger( 'mouseenter' );
 
-    setTimeout(function() {
-      assert.ok(R($tip.offset().top) <= R($el.offset().top - $el.height()),
-        'Tip is on top');
+    setTimeout( function() {
+      assert.ok( R( $tip.offset().top ) <= R( $el.offset().top - $el.height()),
+        'Tip is on top' );
       assert.ok(
-        Math.abs(($tip.offset().left + $tip.width() / 2) -
-                 ($el.offset().left + $el.width() / 2)) < 2,
-        'Tip is centered horizontally');
+        Math.abs(( $tip.offset().left + $tip.width() / 2 ) -
+                 ( $el.offset().left + $el.width() / 2 )) < 2,
+        'Tip is centered horizontally' );
       done();
-    }, 500);
+    }, 500 );
   });
 
-  QUnit.test('Tip appears on bottom', function(assert) {
-    assert.expect(2);
+  QUnit.test( 'Tip appears on bottom', function( assert ) {
+    assert.expect( 2 );
     var done = assert.async();
 
     var $el = this.$el;
     $el.tooltip({
-      tip: "test",
-      place: "bottom"
+      tip:   'test',
+      place: 'bottom'
     });
-    var $tip = $el.data('tooltip').$tooltip;
-    $el.trigger('mouseenter');
+    var $tip = $el.data( 'tooltip' ).$tooltip;
+    $el.trigger( 'mouseenter' );
 
-    setTimeout(function() {
-      assert.ok(R($tip.offset().top) >= R($el.offset().top + $el.height()),
-        'Tip is on bottom');
+    setTimeout( function() {
+      assert.ok( R( $tip.offset().top ) >= R( $el.offset().top + $el.height()),
+        'Tip is on bottom' );
       assert.ok(
-        Math.abs(($tip.offset().left + $tip.width() / 2) -
-                 ($el.offset().left + $el.width() / 2)) < 2,
-        'Tip is centered horizontally');
+        Math.abs(( $tip.offset().left + $tip.width() / 2 ) -
+                 ( $el.offset().left + $el.width() / 2 )) < 2,
+        'Tip is centered horizontally' );
       done();
     });
   });
 
   /*******************/
-  QUnit.module('Tip Placement by Attribute', lifecycle);
+  QUnit.module( 'Tip Placement by Attribute', lifecycle );
 
-  QUnit.test('Tip appears on left with attribute set', function(assert) {
-    assert.expect(1);
+  QUnit.test( 'Tip appears on left with attribute set', function( assert ) {
+    assert.expect( 1 );
 
-    this.$el.data('place', 'left');
+    this.$el.data( 'place', 'left' );
     this.$el.tooltip({
-      tip: "test"
+      tip: 'test'
     });
-    var $tip = this.$el.data('tooltip').$tooltip;
+    var $tip = this.$el.data( 'tooltip' ).$tooltip;
 
-    this.$el.trigger('hover');
-    assert.ok(R($tip.offset().left + $tip.width()) <= R(this.$el.offset().left));
+    this.$el.trigger( 'hover' );
+    assert.ok( R( $tip.offset().left + $tip.width()) <= R( this.$el.offset().left ));
   });
 
-  QUnit.test('Tip appears on right with attribute set', function(assert) {
-    assert.expect(1);
+  QUnit.test( 'Tip appears on right with attribute set', function( assert ) {
+    assert.expect( 1 );
 
-    this.$el.data('place', 'right');
+    this.$el.data( 'place', 'right' );
     this.$el.tooltip({
-      tip: "test"
+      tip: 'test'
     });
-    var $tip = this.$el.data('tooltip').$tooltip;
+    var $tip = this.$el.data( 'tooltip' ).$tooltip;
 
-    this.$el.trigger('hover');
-    assert.ok(R($tip.offset().left) >= R(this.$el.offset().left + this.$el.width()));
+    this.$el.trigger( 'hover' );
+    assert.ok( R( $tip.offset().left ) >= R( this.$el.offset().left + this.$el.width()));
   });
 
-  QUnit.test('Tip appears on top with attribute set', function(assert) {
-    assert.expect(1);
+  QUnit.test( 'Tip appears on top with attribute set', function( assert ) {
+    assert.expect( 1 );
 
-    this.$el.data('place', 'top');
+    this.$el.data( 'place', 'top' );
     this.$el.tooltip({
-      tip: "test"
+      tip: 'test'
     });
-    var $tip = this.$el.data('tooltip').$tooltip;
+    var $tip = this.$el.data( 'tooltip' ).$tooltip;
 
-    this.$el.trigger('hover');
-    assert.ok(R($tip.offset().top) <= R(this.$el.offset().top - this.$el.height()));
+    this.$el.trigger( 'hover' );
+    assert.ok( R( $tip.offset().top ) <= R( this.$el.offset().top - this.$el.height()));
   });
 
-  QUnit.test('Tip appears on bottom with attribute set', function(assert) {
-    assert.expect(1);
+  QUnit.test( 'Tip appears on bottom with attribute set', function( assert ) {
+    assert.expect( 1 );
 
-    this.$el.data('place', 'bottom');
+    this.$el.data( 'place', 'bottom' );
     this.$el.tooltip({
-      tip: "test"
+      tip: 'test'
     });
-    var $tip = this.$el.data('tooltip').$tooltip;
+    var $tip = this.$el.data( 'tooltip' ).$tooltip;
 
-    this.$el.trigger('hover');
-    assert.ok(R($tip.offset().top) >= R(this.$el.offset().top + this.$el.height()));
+    this.$el.trigger( 'hover' );
+    assert.ok( R( $tip.offset().top ) >= R( this.$el.offset().top + this.$el.height()));
   });
 
   /*******************/
-  QUnit.module('Force open and close', lifecycle);
+  QUnit.module( 'Force open and close', lifecycle );
 
-  QUnit.test('You can force open the tip on command', function(assert) {
-    assert.expect(3);
+  QUnit.test( 'You can force open the tip on command', function( assert ) {
+    assert.expect( 3 );
     var done1 = assert.async();
     var done2 = assert.async();
 
@@ -390,19 +391,18 @@ require(['gemini', 'gemini.tooltip'], function(G) {
     $el.tooltip({
       tip: 'test'
     });
-    var tip = $el.data('tooltip').$tooltip[0];
+    var tip = $el.data( 'tooltip' ).$tooltip[0];
 
-    assert.ok(!visibleInBody(tip));
-    $el.tooltip('open');
-    setTimeout(function() {
-      assert.ok(visibleInBody(tip), 'Tip was opened');
-      $el.tooltip('close');
+    assert.ok( !visibleInBody( tip ));
+    $el.tooltip( 'open' );
+    setTimeout( function() {
+      assert.ok( visibleInBody( tip ), 'Tip was opened' );
+      $el.tooltip( 'close' );
       done1();
-    }, 500);
-    setTimeout(function() {
-      assert.ok(!visibleInBody(tip), 'Tip was closed');
+    }, 500 );
+    setTimeout( function() {
+      assert.ok( !visibleInBody( tip ), 'Tip was closed' );
       done2();
-    }, 1000);
+    }, 1000 );
   });
-
 });

@@ -1,15 +1,15 @@
 'use strict';
 
-module.exports = function (grunt) {
+module.exports = function( grunt ) {
   // Load all grunt tasks
-  require('load-grunt-tasks')(grunt);
+  require( 'load-grunt-tasks' )( grunt );
   // Show elapsed time at the end
-  require('time-grunt')(grunt);
+  require( 'time-grunt' )( grunt );
 
   // Project configuration.
   grunt.initConfig({
     // Metadata.
-    pkg: grunt.file.readJSON('package.json'),
+    pkg:    grunt.file.readJSON( 'package.json' ),
     banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
       '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
       '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
@@ -20,36 +20,31 @@ module.exports = function (grunt) {
       all: {
         options: {
           timeout: 10000,
-          urls: ['http://localhost:9000/test/<%= pkg.name %>.html'],
-          page : {
-            viewportSize : { width: 10000, height: 10000 }
+          urls:    [ 'http://localhost:9000/test/<%= pkg.name %>.html' ],
+          page:    {
+            viewportSize: { width: 10000, height: 10000 }
           }
         }
       }
     },
-    jshint: {
+    eslint: {
       options: {
-        reporter: require('jshint-stylish')
+        configFile: '.eslintrc'
       },
-      src: {
-        options: {
-          jshintrc: './.jshintrc'
-        },
-        src: ['./gemini.js']
-      }
+      target: [ 'gemini.tooltip.js' ]
     },
     connect: {
       server: {
         options: {
           hostname: '*',
-          port: 9000
+          port:     9000
         }
       }
     },
     compass: {
       options: {
         sassDir: 'test',
-        cssDir: 'test'
+        cssDir:  'test'
       },
       dist: {
         options: {
@@ -60,8 +55,8 @@ module.exports = function (grunt) {
     'saucelabs-qunit': {
       all: {
         options: {
-          urls: ['http://localhost:9000/test/<%= pkg.name %>.html'],
-          build: process.env.TRAVIS_JOB_ID,
+          urls:     [ 'http://localhost:9000/test/<%= pkg.name %>.html' ],
+          build:    process.env.TRAVIS_JOB_ID,
           browsers: [
             /*
             // iOS
@@ -85,65 +80,65 @@ module.exports = function (grunt) {
             // OS X
             {
               browserName: 'safari',
-              platform: 'OS X 10.9',
-              version: '7'
+              platform:    'OS X 10.9',
+              version:     '7'
             },
             {
               browserName: 'safari',
-              platform: 'OS X 10.8',
-              version: '6'
+              platform:    'OS X 10.8',
+              version:     '6'
             },
             {
               browserName: 'firefox',
-              platform: 'OS X 10.9',
-              version: '28'
+              platform:    'OS X 10.9',
+              version:     '28'
             },
             // Windows
             {
               browserName: 'internet explorer',
-              platform: 'Windows 8.1',
-              version: '11'
+              platform:    'Windows 8.1',
+              version:     '11'
             },
             {
               browserName: 'internet explorer',
-              platform: 'Windows 8',
-              version: '10'
+              platform:    'Windows 8',
+              version:     '10'
             },
             {
               browserName: 'internet explorer',
-              platform: 'Windows 7',
-              version: '11'
+              platform:    'Windows 7',
+              version:     '11'
             },
             {
               browserName: 'internet explorer',
-              platform: 'Windows 7',
-              version: '10'
+              platform:    'Windows 7',
+              version:     '10'
             },
             {
               browserName: 'internet explorer',
-              platform: 'Windows 7',
-              version: '9'
+              platform:    'Windows 7',
+              version:     '9'
             },
             {
               browserName: 'internet explorer',
-              platform: 'Windows 7',
-              version: '8'
+              platform:    'Windows 7',
+              version:     '8'
             },
             {
               browserName: 'firefox',
-              platform: 'Windows 7',
-              version: '29'
+              platform:    'Windows 7',
+              version:     '29'
             },
             {
               browserName: 'chrome',
-              platform: 'Windows 7',
-              version: '34'
+              platform:    'Windows 7',
+              version:     '34'
             },
             // Linux
             {
               browserName: 'firefox',
-              platform: 'Linux',
-              version: '29'
+              platform:    'Linux',
+              version:     '29'
             }
           ]
         }
@@ -152,6 +147,6 @@ module.exports = function (grunt) {
   });
 
   // Default task.
-  grunt.registerTask('default', ['compass', 'jshint', 'connect', 'qunit']);
-  grunt.registerTask('ci', ['default', 'saucelabs-qunit']);
+  grunt.registerTask( 'default', [ 'compass', 'eslint', 'connect', 'qunit' ]);
+  grunt.registerTask( 'ci', [ 'default', 'saucelabs-qunit' ]);
 };
