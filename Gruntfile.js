@@ -148,5 +148,5 @@ module.exports = function( grunt ) {
 
   // Default task.
   grunt.registerTask( 'default', [ 'compass', 'eslint', 'connect', 'qunit' ]);
-  grunt.registerTask( 'ci', [ 'default', 'saucelabs-qunit' ]);
+  grunt.registerTask( 'ci', [ 'default' /* 'saucelabs-qunit' */ ]);
 };
