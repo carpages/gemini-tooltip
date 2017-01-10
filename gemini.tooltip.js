@@ -88,7 +88,7 @@ it primarily on ``<span>`` elements
        * BUILD THE TOOLTIP
        * -----------------
        */
-       plugin.$tip = $( '<div class="tooltip__tip tooltip__tip--arrow-' + arrowPlacement + '">' ).html( plugin.settings.tip );
+       plugin.$tip = $( '<div class="tooltip__tip">' ).html( plugin.settings.tip );
        plugin.$tooltip = $( '<div class="tooltip">' ).html( plugin.$tip );
        if ( plugin.settings.extension ) plugin.$tooltip.addClass( plugin.settings.extension );
        plugin.$el.addClass( 'w-tooltip' ).append( plugin.$tooltip );
