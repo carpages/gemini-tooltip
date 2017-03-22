@@ -3,4 +3,5 @@ node_modules
 bower_components
 .sass-cache
 _build
-gemini-tooltip.test.css
+*.css
+yarn.lock
