@@ -35,89 +35,96 @@ $gemini-tooltip: extend((
     position: relative;
     cursor: help;
   }
+
   a .w-tooltip,
   a.w-tooltip {
     cursor: pointer;
   }
 }
 
-  .tooltip {
-    height: 0;
-    overflow: hidden;
-    position: absolute;
-    display: inline-block;
-    z-index: 11;
+.tooltip {
+  position: absolute;
+  z-index: 11;
+  display: inline-block;
+  height: 0;
+  overflow: hidden;
 
-    // Add slight transition
-    opacity: 0;
-    @include gpu;
-    @include transition(opacity .25s ease);
+  // Add slight transition
+  opacity: 0;
+  @include gpu;
+  @include transition(opacity 0.25s ease);
 
-    &.is-active,
-    &.is-forced-active {
-      height: auto;
-      overflow: visible;
-      opacity: 1;
-    }
+  &.is-active,
+  &.is-forced-active {
+    height: auto;
+    overflow: visible;
+    opacity: 1;
   }
-  .tooltip__tip {
-    @include tag(
-      $color         : get(color, $gemini-tooltip),
-      $background    : get(background-color, $gemini-tooltip),
-      $ends          : get(padding-ends, $gemini-tooltip),
-      $sides         : get(padding-sides, $gemini-tooltip),
-      $border-width  : get(border-width, $gemini-tooltip),
-      $border-color  : get(border-color, $gemini-tooltip),
-      $border-radius : get(border-radius, $gemini-tooltip)
-    );
-    white-space: nowrap;
-    position: relative;
+}
 
-    a {
-      color: getColor(g20);
-    }
+.tooltip__tip {
+  @include tag(
+    $color         : get(color, $gemini-tooltip),
+    $background    : get(background-color, $gemini-tooltip),
+    $ends          : get(padding-ends, $gemini-tooltip),
+    $sides         : get(padding-sides, $gemini-tooltip),
+    $border-width  : get(border-width, $gemini-tooltip),
+    $border-color  : get(border-color, $gemini-tooltip),
+    $border-radius : get(border-radius, $gemini-tooltip)
+  );
+
+  position: relative;
+  white-space: nowrap;
+
+  a {
+    color: getColor(g20);
   }
-    .tooltip__tip--arrow-top {
-      top: get(arrow-size, $gemini-tooltip);
-      @include arrow(
-        top,
-        center,
-        get(arrow-size, $gemini-tooltip),
-        get(background-color, $gemini-tooltip),
-        get(border-width, $gemini-tooltip),
-        get(border-color, $gemini-tooltip)
-      );
-    }
-    .tooltip__tip--arrow-bottom {
-      top: - get(arrow-size, $gemini-tooltip);
-      @include arrow(
-        bottom,
-        center,
-        get(arrow-size, $gemini-tooltip),
-        get(background-color, $gemini-tooltip),
-        get(border-width, $gemini-tooltip),
-        get(border-color, $gemini-tooltip)
-      );
-    }
-    .tooltip__tip--arrow-left {
-      left: get(arrow-size, $gemini-tooltip);
-      @include arrow(
-        left,
-        center,
-        get(arrow-size, $gemini-tooltip),
-        get(background-color, $gemini-tooltip),
-        get(border-width, $gemini-tooltip),
-        get(border-color, $gemini-tooltip)
-      );
-    }
-    .tooltip__tip--arrow-right {
-      right: get(arrow-size, $gemini-tooltip);
-      @include arrow(
-        right,
-        center,
-        get(arrow-size, $gemini-tooltip),
-        get(background-color, $gemini-tooltip),
-        get(border-width, $gemini-tooltip),
-        get(border-color, $gemini-tooltip)
-      );
-    }
+}
+
+.tooltip__tip--arrow-top {
+  top: get(arrow-size, $gemini-tooltip);
+  @include arrow(
+    top,
+    center,
+    get(arrow-size, $gemini-tooltip),
+    get(background-color, $gemini-tooltip),
+    get(border-width, $gemini-tooltip),
+    get(border-color, $gemini-tooltip)
+  );
+}
+
+.tooltip__tip--arrow-bottom {
+  top: - get(arrow-size, $gemini-tooltip);
+  @include arrow(
+    bottom,
+    center,
+    get(arrow-size, $gemini-tooltip),
+    get(background-color, $gemini-tooltip),
+    get(border-width, $gemini-tooltip),
+    get(border-color, $gemini-tooltip)
+  );
+}
+
+.tooltip__tip--arrow-left {
+  left: get(arrow-size, $gemini-tooltip);
+  @include arrow(
+    left,
+    center,
+    get(arrow-size, $gemini-tooltip),
+    get(background-color, $gemini-tooltip),
+    get(border-width, $gemini-tooltip),
+    get(border-color, $gemini-tooltip)
+  );
+}
+
+.tooltip__tip--arrow-right {
+  right: get(arrow-size, $gemini-tooltip);
+  @include arrow(
+    right,
+    center,
+    get(arrow-size, $gemini-tooltip),
+    get(background-color, $gemini-tooltip),
+    get(border-width, $gemini-tooltip),
+    get(border-color, $gemini-tooltip)
+  );
+}

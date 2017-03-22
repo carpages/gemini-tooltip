@@ -99,10 +99,10 @@ it primarily on ``<span>`` elements
        * ---------------
        */
        var arrowPlacement = {
-         top:    'bottom',
+         top: 'bottom',
          bottom: 'top',
-         left:   'right',
-         right:  'left'
+         left: 'right',
+         right: 'left'
        }[plugin.settings.place];
 
        plugin.$tip.addClass( 'tooltip__tip--arrow-' + arrowPlacement );
