@@ -3,49 +3,35 @@
  * Added for Saucelabs
  * https://github.com/axemclion/grunt-saucelabs#test-result-details-with-qunit
  */
-var log = [];
-var testName;
+// var log = [];
+// var testName;
+//
+// QUnit.done( function( testResults ) {
+//   var tests = [];
+//   for ( var i = 0, len = log.length; i < len; i++ ) {
+//     var details = log[i];
+//     tests.push({
+//       name: details.name,
+//       result: details.result,
+//       expected: details.expected,
+//       actual: details.actual,
+//       source: details.source
+//     });
+//   }
+//   testResults.tests = tests;
+//
+//   window.global_test_results = testResults;
+// });
+// QUnit.testStart( function( testDetails ) {
+//   QUnit.log( function( details ) {
+//     if ( !details.result ) {
+//       details.name = testDetails.name;
+//       log.push( details );
+//     }
+//   });
+// });
 
-QUnit.done( function( testResults ) {
-  var tests = [];
-  for ( var i = 0, len = log.length; i < len; i++ ) {
-    var details = log[i];
-    tests.push({
-      name: details.name,
-      result: details.result,
-      expected: details.expected,
-      actual: details.actual,
-      source: details.source
-    });
-  }
-  testResults.tests = tests;
-
-  window.global_test_results = testResults;
-});
-QUnit.testStart( function( testDetails ) {
-  QUnit.log( function( details ) {
-    if ( !details.result ) {
-      details.name = testDetails.name;
-      log.push( details );
-    }
-  });
-});
-
-/*
- * Require for Tests
- */
-requirejs.config({
-  baseUrl: '../',
-  paths: {
-    'underscore': 'bower_components/underscore/underscore',
-    'jquery': 'bower_components/jquery/dist/jquery',
-    'jquery.boiler': 'bower_components/jquery-boiler/jquery.boiler',
-    'gemini': 'bower_components/gemini-loader/gemini',
-    'gemini.support': 'bower_components/gemini-support/gemini.support'
-  }
-});
-
-require([ 'gemini', 'gemini.tooltip' ], function( G ) {
+require([ 'qunit', 'gemini', 'gemini.tooltip' ], function( QUnit, G ) {
   QUnit.start();
   // Phantom JS touch hack
   // https://github.com/Modernizr/Modernizr/issues/1344
@@ -62,20 +48,20 @@ require([ 'gemini', 'gemini.tooltip' ], function( G ) {
     http://api.qunitjs.com/
 
     Test methods:
-      module(name, {[setup][ ,teardown]})
-      test(name, callback)
-      expect(numberOfAssertions)
-      stop(increment)
-      start(decrement)
+      QUnit.module(name, {[setup][ ,teardown]})
+      QUnit.test(name, callback)
+      QUnit.expect(numberOfAssertions)
+      QUnit.stop(increment)
+      QUnit.start(decrement)
     Test assertions:
-      ok(value, [message])
-      equal(actual, expected, [message])
-      notEqual(actual, expected, [message])
-      deepEqual(actual, expected, [message])
-      notDeepEqual(actual, expected, [message])
-      strictEqual(actual, expected, [message])
-      notStrictEqual(actual, expected, [message])
-      throws(block, [expected], [message])
+      assert.ok(value, [message])
+      assert.equal(actual, expected, [message])
+      assert.notEqual(actual, expected, [message])
+      assert.deepEqual(actual, expected, [message])
+      assert.notDeepEqual(actual, expected, [message])
+      assert.strictEqual(actual, expected, [message])
+      assert.notStrictEqual(actual, expected, [message])
+      assert.throws(block, [expected], [message])
   */
 
   /**

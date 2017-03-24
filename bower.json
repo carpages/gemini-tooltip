@@ -16,7 +16,7 @@
     "gemini-css": "~1"
   },
   "devDependencies": {
-    "requirejs": "~2.1.11",
-    "qunit": "~1.18.0"
+    "requirejs": "~2",
+    "qunit": "~2"
   }
 }
