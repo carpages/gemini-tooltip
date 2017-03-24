@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v1.1.3
+
+  - Drop dependency on Ruby
+  - Use Carpages eslint config
+
 ## v1.1.2
 
   - Remove unneeded class for tip positioning
